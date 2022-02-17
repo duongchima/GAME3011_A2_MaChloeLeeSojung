@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
+    public bool unlocked = false;
 
-    // Update is called once per frame
+    public GameObject Screwdriver;
+    public GameObject BobbyPin;
+
     void Update()
     {
-       
+       if (Input.GetKey(KeyCode.D))
+       {
+            Screwdriver.transform.Rotate(Vector3.forward);
+       }
+       else if (Input.GetKey(KeyCode.A))
+       {
+            Screwdriver.transform.Rotate(-Vector3.forward);
+       }
+
+        BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * 0.1f, 0, 180));
+
     }
 }
