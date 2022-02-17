@@ -1399,6 +1399,8 @@ MonoBehaviour:
   unlocked: 0
   Screwdriver: {fileID: 0}
   BobbyPin: {fileID: 0}
+  screwdriver_sweetSpot: 0
+  bobbypin_sweetSpot: 0
 --- !u!212 &2098674475
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1583,7 +1585,6 @@ GameObject:
   - component: {fileID: 3723951857978931682}
   - component: {fileID: 3540951679160271578}
   - component: {fileID: 3540444283035619406}
-  - component: {fileID: 3543519196099031394}
   - component: {fileID: 3509257278855351365}
   - component: {fileID: 3571673049662805128}
   - component: {fileID: 3593899159367791812}
@@ -1609,6 +1610,8 @@ MonoBehaviour:
   unlocked: 0
   Screwdriver: {fileID: 3509406386758783486}
   BobbyPin: {fileID: 3508532965062137702}
+  screwdriver_sweetSpot: 0
+  bobbypin_sweetSpot: 0
 --- !u!1 &3509406386758783486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,35 +1836,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &3543519196099031394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3509257278855351364}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e101a7bcc1da2bb4fab2c1c1df5ea8d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cylinder: {fileID: 3723136289166709426}
-  cylinderSize: 0
-  lockpick: {fileID: 3722315574393347566}
-  sweetspotRange: 46.4
-  rotateButton: a
-  rotateSpeed: 50
-  rotateToWin: 100
-  deactivateDelay: 1
-  rotateSound: {fileID: 8300000, guid: 6856e62ab046b754b9aeac8f8d70e06d, type: 3}
-  clickSound: {fileID: 8300000, guid: cd530749038d0d049a8f74b5e4af7bce, type: 3}
-  resetSound: {fileID: 8300000, guid: 45530cd62f38bb2409d4491ea685c557, type: 3}
-  winSound: {fileID: 8300000, guid: 8bdfd041b44428b4da822396905392e8, type: 3}
-  index: 0
-  isRotating: 0
-  inSweetspot: 0
-  isUnlocked: 0
-  sweetspotAngle: 0
 --- !u!114 &3543616857881142156
 MonoBehaviour:
   m_ObjectHideFlags: 0
