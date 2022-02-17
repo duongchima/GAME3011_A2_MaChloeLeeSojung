@@ -22,11 +22,8 @@ public class Lock : MonoBehaviour
     {
         if (!unlocked)
         {
-
-
-            
-
-            if (Screwdriver.transform.rotation.eulerAngles.z > screwdriver_sweetSpot - 10 && Screwdriver.transform.rotation.eulerAngles.z < screwdriver_sweetSpot + 10)
+            if (Screwdriver.transform.rotation.eulerAngles.z > screwdriver_sweetSpot - GameManager.Instance.threshold &&
+                Screwdriver.transform.rotation.eulerAngles.z < screwdriver_sweetSpot + GameManager.Instance.threshold)
             {
                 //unlocked = true;
             }
@@ -42,7 +39,8 @@ public class Lock : MonoBehaviour
                 }
             }
 
-            if (BobbyPin.transform.rotation.eulerAngles.z > bobbypin_sweetSpot - 10 && BobbyPin.transform.rotation.eulerAngles.z < bobbypin_sweetSpot + 10)
+            if (BobbyPin.transform.rotation.eulerAngles.z > bobbypin_sweetSpot - GameManager.Instance.threshold && 
+                BobbyPin.transform.rotation.eulerAngles.z < bobbypin_sweetSpot + GameManager.Instance.threshold)
             {
 
             }

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public float timer;
     public TextMeshProUGUI timerText;
 
+    public float threshold;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -51,14 +53,17 @@ public class GameManager : MonoBehaviour
         {
             case Difficulties.Easy:
                 timer = 15;
+                threshold = 10;
                 Debug.Log("Difficulty set to easy");
                 break;
             case Difficulties.Medium:
                 timer = 30;
+                threshold = 5;
                 Debug.Log("Difficulty set to medium");
                 break;
             case Difficulties.Hard:
                 timer = 60;
+                threshold = 1;
                 Debug.Log("Difficulty set to hard");
                 break;
         }
