@@ -13,11 +13,13 @@ public class DiceRoll : MonoBehaviour
     public void RollDifficulty()
     {
         diceNum = Random.Range(0, 20);
+        UpdateDifficulty();
         diceText.text = diceNum.ToString();
     }
-    void Update()
+
+    void UpdateDifficulty()
     {
-        if(diceNum >= 0 && diceNum <= 6)
+        if (diceNum >= 0 && diceNum <= 6)
         {
             GameManager.Instance.UpdateDifficulty(GameManager.Difficulties.Hard);
         }
