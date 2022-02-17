@@ -312,6 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   timerText: {fileID: 1448005765}
+  threshold: 0
+  playerSkill: 10
 --- !u!4 &52138192
 Transform:
   m_ObjectHideFlags: 0

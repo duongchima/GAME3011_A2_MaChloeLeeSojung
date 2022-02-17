@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public float threshold;
 
+    public PlayerSkillLevel playerSkill;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -44,7 +46,14 @@ public class GameManager : MonoBehaviour
         Easy,
         Medium,
         Hard
-    };
+    }
+
+    public enum PlayerSkillLevel
+    {
+        Beginner = 1,
+        Intermediate = 5,
+        Advanced = 10
+    }
 
     public void UpdateDifficulty(Difficulties newDifficulty)
     {
