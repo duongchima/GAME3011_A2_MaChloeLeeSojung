@@ -14,30 +14,41 @@ public class Lock : MonoBehaviour
 
     private void Start()
     {
-        float randomAngle = Random.Range(0, 180);
-
-        screwdriver_sweetSpot = randomAngle;
-        bobbypin_sweetSpot = 0;
+        screwdriver_sweetSpot = Random.Range(0, 180);
+        bobbypin_sweetSpot = Random.Range(0, 180);
     }
 
     void Update()
     {
         if (!unlocked)
         {
-            if (Input.GetKey(KeyCode.D))
-            {
-                Screwdriver.transform.Rotate(Vector3.forward, 0.1f);
-            }
-            else if (Input.GetKey(KeyCode.A))
-            {
-                Screwdriver.transform.Rotate(-Vector3.forward, 0.1f);
-            }
 
-            BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * 0.1f, 0, 180));
+
+            
 
             if (Screwdriver.transform.rotation.eulerAngles.z > screwdriver_sweetSpot - 10 && Screwdriver.transform.rotation.eulerAngles.z < screwdriver_sweetSpot + 10)
             {
-                unlocked = true;
+                //unlocked = true;
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.D))
+                {
+                    Screwdriver.transform.Rotate(Vector3.forward, 0.1f);
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    Screwdriver.transform.Rotate(-Vector3.forward, 0.1f);
+                }
+            }
+
+            if (BobbyPin.transform.rotation.eulerAngles.z > bobbypin_sweetSpot - 10 && BobbyPin.transform.rotation.eulerAngles.z < bobbypin_sweetSpot + 10)
+            {
+
+            }
+            else
+            {
+                BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * 0.1f, 0, 180));
             }
         }
         else
