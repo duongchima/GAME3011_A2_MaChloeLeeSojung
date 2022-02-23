@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     public float threshold;
 
+    public GameObject Lock, resetButton, victory, startButton;
+    [SerializeField]
+    private Lock _lock;
+    [SerializeField]
+    private DiceRoll diceRoll;
     public PlayerSkillLevel playerSkill;
 
     void Awake()
@@ -26,10 +31,18 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+    void Start()
+    {
 
+    }
     private void Update()
     {
         Countdown();
+        if (_lock.unlocked)
+        {
+            victory.SetActive(true);
+            timer = 0;
+        }
     }
 
     public void Countdown()
@@ -75,6 +88,49 @@ public class GameManager : MonoBehaviour
                 threshold = 1;
                 Debug.Log("Difficulty set to hard");
                 break;
+        }
+    }
+    public void DisplayLock()
+    {
+        Lock.SetActive(true);
+        resetButton.SetActive(true);
+        startButton.SetActive(false);
+        GenerateSweetSpot();
+    }
+    public void GenerateSweetSpot()
+    {
+        _lock.screwdriverSweetSpotRot = Random.Range(0, 180);
+        _lock.bobbyPinSweetSpotRot = Random.Range(0, 180);
+        _lock.bobbyPinSweetSpotPos = Random.Range(-25, 40);
+        _lock.screwdriverSweetSpotPos = Random.Range(-10, 60);
+    }
+    public void Reset()
+    {
+        _lock.BobbyPin.transform.rotation = _lock.bobbyPinStartRot;
+        _lock.Screwdriver.transform.rotation = _lock.screwdriverStartingRot;
+        GenerateSweetSpot();
+        if (!_lock.unlocked)
+        {
+            if (Difficulty == Difficulties.Easy)
+            {
+                timer = 15;
+            }
+            else if (Difficulty == Difficulties.Medium)
+            {
+                timer = 30;
+            }
+            else if (Difficulty == Difficulties.Hard)
+            {
+                timer = 60;
+            }
+        }
+        else
+        {
+            _lock.Locks["LockBase"] = false;
+            _lock.Locks["BobbyPin"] = false;
+            _lock.Locks["Screwdriver"] = false;
+            _lock.unlocked = false;
+            diceRoll.RollDifficulty();
         }
     }
 }
