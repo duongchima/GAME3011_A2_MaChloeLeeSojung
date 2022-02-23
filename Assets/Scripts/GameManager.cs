@@ -112,8 +112,8 @@ public class GameManager : MonoBehaviour
     {
         _lock.screwdriverSweetSpotRot = Random.Range(0, 180);
         _lock.bobbyPinSweetSpotRot = Random.Range(0, 180);
-        _lock.bobbyPinSweetSpotPos = Random.Range(-5, 48);
-        _lock.screwdriverSweetSpotPos = Random.Range(-5, 48);
+        _lock.bobbyPinSweetSpotPos = Random.Range(-12, 38);
+        _lock.screwdriverSweetSpotPos = Random.Range(-12, 38);
     }
     public void Reset()
     {

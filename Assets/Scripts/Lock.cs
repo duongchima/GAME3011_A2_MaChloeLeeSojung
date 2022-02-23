@@ -129,47 +129,35 @@ public class Lock : MonoBehaviour
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            if (Screwdriver.transform.position.y <= 375) {
+            if (Screwdriver.transform.position.y <= 660) {
                 Screwdriver.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * screwdriverMoveSpeed;
-                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Screwdriver.transform.rotation.eulerAngles.z), 1f)
-                        .setLoopPingPong(1)
-                        .setEaseInOutBack();
+                
             }
         }
         if(Input.GetAxisRaw("Vertical") < 0)
         {
-            if (Screwdriver.transform.position.y >= 345)
+            if (Screwdriver.transform.position.y >= 610)
             {
                 Screwdriver.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * screwdriverMoveSpeed;
-                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Screwdriver.transform.rotation.eulerAngles.z), 1f)
-                        .setLoopPingPong(1)
-                        .setEaseInOutBack();
+                
             }
         }
     }
     private void AllowBobbyPinMovement()
     {
         BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * bobbypinRotSpeed, 0, 180));
-        if(Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            if (BobbyPin.transform.position.y >= 345)
+            if (BobbyPin.transform.position.y >= 610)
             {
                 BobbyPin.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
-
-                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), BobbyPin.transform.rotation.eulerAngles.z), 1f)
-                         .setLoopPingPong(1)
-                         .setEaseInOutBack();
             }
         }
         if(Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if (BobbyPin.transform.position.y <= 375)
+            if (BobbyPin.transform.position.y <= 660)
             {
                 BobbyPin.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
-
-                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), BobbyPin.transform.rotation.eulerAngles.z), 1f)
-                         .setLoopPingPong(1)
-                         .setEaseInOutBack();
             }
         }
     }
