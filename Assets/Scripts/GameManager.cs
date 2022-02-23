@@ -10,10 +10,9 @@ public class GameManager : MonoBehaviour
 
     public float timer;
     public TextMeshProUGUI timerText;
-
+    bool gameStarted;
     public float threshold;
-
-    public GameObject Lock, resetButton, victory, startButton;
+    public GameObject Lock, resetButton, victory, gameOver, startButton;
     [SerializeField]
     private Lock _lock;
     [SerializeField]
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-
+        gameStarted = false;
     }
     private void Update()
     {
@@ -41,6 +40,8 @@ public class GameManager : MonoBehaviour
         if (_lock.unlocked)
         {
             victory.SetActive(true);
+            Lock.SetActive(false);
+            resetButton.SetActive(false);
             timer = 0;
         }
     }
@@ -51,6 +52,15 @@ public class GameManager : MonoBehaviour
         {
             timerText.text = $"Timer  -  {Mathf.FloorToInt(timer)} seconds";
             timer -= Time.deltaTime;
+        }
+        if(timer <= 0)
+        {
+            if (!_lock.unlocked && gameStarted)
+            {
+                gameOver.SetActive(true);
+                Lock.SetActive(false);
+                resetButton.SetActive(false);
+            }
         }
     }
 
@@ -95,20 +105,25 @@ public class GameManager : MonoBehaviour
         Lock.SetActive(true);
         resetButton.SetActive(true);
         startButton.SetActive(false);
+        gameStarted = true;
         GenerateSweetSpot();
     }
     public void GenerateSweetSpot()
     {
         _lock.screwdriverSweetSpotRot = Random.Range(0, 180);
         _lock.bobbyPinSweetSpotRot = Random.Range(0, 180);
-        _lock.bobbyPinSweetSpotPos = Random.Range(-25, 40);
-        _lock.screwdriverSweetSpotPos = Random.Range(-10, 60);
+        _lock.bobbyPinSweetSpotPos = Random.Range(-5, 48);
+        _lock.screwdriverSweetSpotPos = Random.Range(-5, 48);
     }
     public void Reset()
     {
         _lock.BobbyPin.transform.rotation = _lock.bobbyPinStartRot;
         _lock.Screwdriver.transform.rotation = _lock.screwdriverStartingRot;
         GenerateSweetSpot();
+        resetButton.SetActive(true);
+        Lock.SetActive(true);
+        gameOver.SetActive(false);
+        victory.SetActive(false);
         if (!_lock.unlocked)
         {
             if (Difficulty == Difficulties.Easy)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
+ 
     public bool unlocked = false;
     public Quaternion bobbyPinStartRot;
     public Quaternion screwdriverStartingRot;
@@ -16,13 +17,14 @@ public class Lock : MonoBehaviour
     [Header("Equipment Speed")]
     public float screwdriverRotSpeed = 0.1f;
     public float bobbypinRotSpeed = 0.1f;
-    public float movementSpeed = 2000.0f;
+    public float screwdriverMoveSpeed = 2000.0f;
+    public float bobbyPinMoveSpeed = 500.0f;
 
     [Header("Sweet Spots")]
-    public float screwdriverSweetSpotRot = 0;
-    public float bobbyPinSweetSpotRot = 0;
-    public float screwdriverSweetSpotPos = 0;
-    public float bobbyPinSweetSpotPos = 0;
+    public float screwdriverSweetSpotRot;
+    public float bobbyPinSweetSpotRot;
+    public float screwdriverSweetSpotPos;
+    public float bobbyPinSweetSpotPos;
 
     public Dictionary<string, bool> Locks = new Dictionary<string, bool>(3);
 
@@ -58,12 +60,14 @@ public class Lock : MonoBehaviour
             if (Screwdriver.transform.rotation.eulerAngles.z > screwdriverSweetSpotRot - (increasedChance) &&
                 Screwdriver.transform.rotation.eulerAngles.z < screwdriverSweetSpotRot + (increasedChance))
             {
-
+                    SFX.PlaySound("unlock");
+                Debug.Log("Found screwdriver rotation sweet spot!");
             }
             else if (Screwdriver.transform.position.y > screwdriverSweetSpotPos - (increasedChance) &&
                 Screwdriver.transform.position.y < screwdriverSweetSpotPos + (increasedChance))
             {
-
+                    SFX.PlaySound("unlock");
+                Debug.Log("Found screwdriver position sweet spot!");
             }
             if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) && 
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance) &&
@@ -79,18 +83,21 @@ public class Lock : MonoBehaviour
              if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) &&
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance))
             {
-
+                    SFX.PlaySound("unlock");
+                Debug.Log("Found bobbypin rotation sweet spot!");
             }
             else if (BobbyPin.transform.position.y > bobbyPinSweetSpotPos - (increasedChance) &&
                 BobbyPin.transform.position.y < bobbyPinSweetSpotPos + (increasedChance))
             {
-
+                    SFX.PlaySound("unlock");
+                Debug.Log("Found bobbypin position sweet spot!");
             }
             if (Locks["BobbyPin"] && Locks["Screwdriver"]) Locks["LockBase"] = true;
         }
         else
         {
             print("unlocked");
+            SFX.PlaySound("unlock");
             unlocked = true;
         }
     }
@@ -106,23 +113,48 @@ public class Lock : MonoBehaviour
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            Screwdriver.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * movementSpeed;
+            if (Screwdriver.transform.position.y <= 375) {
+                Screwdriver.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * screwdriverMoveSpeed;
+                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Screwdriver.transform.rotation.eulerAngles.z), 1f)
+                        .setLoopPingPong(1)
+                        .setEaseInOutBack();
+            }
         }
         if(Input.GetAxisRaw("Vertical") < 0)
         {
-            Screwdriver.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * movementSpeed;
+            if (Screwdriver.transform.position.y >= 345)
+            {
+                Screwdriver.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * screwdriverMoveSpeed;
+                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Screwdriver.transform.rotation.eulerAngles.z), 1f)
+                        .setLoopPingPong(1)
+                        .setEaseInOutBack();
+            }
         }
     }
     private void AllowBobbyPinMovement()
     {
         BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * bobbypinRotSpeed, 0, 180));
-        if(Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            BobbyPin.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * movementSpeed;
-        }
         if(Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            BobbyPin.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * movementSpeed;
+            if (BobbyPin.transform.position.y >= 345)
+            {
+                BobbyPin.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
+
+                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), BobbyPin.transform.rotation.eulerAngles.z), 1f)
+                         .setLoopPingPong(1)
+                         .setEaseInOutBack();
+            }
+        }
+        if(Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            if (BobbyPin.transform.position.y <= 375)
+            {
+                BobbyPin.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
+
+                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), BobbyPin.transform.rotation.eulerAngles.z), 1f)
+                         .setLoopPingPong(1)
+                         .setEaseInOutBack();
+            }
         }
     }
 }
