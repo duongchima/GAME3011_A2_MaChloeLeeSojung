@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
         Lock.SetActive(true);
         gameOver.SetActive(false);
         victory.SetActive(false);
+        _lock.hasPlayed = false;
         if (!_lock.unlocked)
         {
             if (Difficulty == Difficulties.Easy)

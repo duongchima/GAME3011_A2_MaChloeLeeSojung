@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
- 
+    public bool hasPlayed = false;
     public bool unlocked = false;
     public Quaternion bobbyPinStartRot;
     public Quaternion screwdriverStartingRot;
@@ -60,14 +60,22 @@ public class Lock : MonoBehaviour
             if (Screwdriver.transform.rotation.eulerAngles.z > screwdriverSweetSpotRot - (increasedChance) &&
                 Screwdriver.transform.rotation.eulerAngles.z < screwdriverSweetSpotRot + (increasedChance))
             {
+                if (!hasPlayed)
+                {
                     SFX.PlaySound("unlock");
-                Debug.Log("Found screwdriver rotation sweet spot!");
+                    Debug.Log("Found screwdriver rotation sweet spot!");
+                    hasPlayed = true;
+                }
             }
             else if (Screwdriver.transform.position.y > screwdriverSweetSpotPos - (increasedChance) &&
                 Screwdriver.transform.position.y < screwdriverSweetSpotPos + (increasedChance))
             {
+                if (!hasPlayed)
+                {
                     SFX.PlaySound("unlock");
-                Debug.Log("Found screwdriver position sweet spot!");
+                    Debug.Log("Found screwdriver rotation sweet spot!");
+                    hasPlayed = true;
+                }
             }
             if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) && 
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance) &&
@@ -83,14 +91,22 @@ public class Lock : MonoBehaviour
              if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) &&
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance))
             {
+                if (!hasPlayed)
+                {
                     SFX.PlaySound("unlock");
-                Debug.Log("Found bobbypin rotation sweet spot!");
+                    Debug.Log("Found screwdriver rotation sweet spot!");
+                    hasPlayed = true;
+                }
             }
             else if (BobbyPin.transform.position.y > bobbyPinSweetSpotPos - (increasedChance) &&
                 BobbyPin.transform.position.y < bobbyPinSweetSpotPos + (increasedChance))
             {
+                if (!hasPlayed)
+                {
                     SFX.PlaySound("unlock");
-                Debug.Log("Found bobbypin position sweet spot!");
+                    Debug.Log("Found screwdriver rotation sweet spot!");
+                    hasPlayed = true;
+                }
             }
             if (Locks["BobbyPin"] && Locks["Screwdriver"]) Locks["LockBase"] = true;
         }
@@ -115,7 +131,7 @@ public class Lock : MonoBehaviour
         {
             if (Screwdriver.transform.position.y <= 375) {
                 Screwdriver.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * screwdriverMoveSpeed;
-                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Screwdriver.transform.rotation.eulerAngles.z), 1f)
+                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Screwdriver.transform.rotation.eulerAngles.z), 1f)
                         .setLoopPingPong(1)
                         .setEaseInOutBack();
             }
@@ -125,7 +141,7 @@ public class Lock : MonoBehaviour
             if (Screwdriver.transform.position.y >= 345)
             {
                 Screwdriver.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * screwdriverMoveSpeed;
-                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Screwdriver.transform.rotation.eulerAngles.z), 1f)
+                LeanTween.rotate(Screwdriver, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), Screwdriver.transform.rotation.eulerAngles.z), 1f)
                         .setLoopPingPong(1)
                         .setEaseInOutBack();
             }
@@ -140,7 +156,7 @@ public class Lock : MonoBehaviour
             {
                 BobbyPin.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
 
-                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), BobbyPin.transform.rotation.eulerAngles.z), 1f)
+                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), BobbyPin.transform.rotation.eulerAngles.z), 1f)
                          .setLoopPingPong(1)
                          .setEaseInOutBack();
             }
@@ -151,7 +167,7 @@ public class Lock : MonoBehaviour
             {
                 BobbyPin.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
 
-                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), BobbyPin.transform.rotation.eulerAngles.z), 1f)
+                LeanTween.rotate(BobbyPin, new Vector3(Random.Range(-20, 20), Random.Range(-20, 20), BobbyPin.transform.rotation.eulerAngles.z), 1f)
                          .setLoopPingPong(1)
                          .setEaseInOutBack();
             }
