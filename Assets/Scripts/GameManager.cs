@@ -75,8 +75,8 @@ public class GameManager : MonoBehaviour
 
     public enum PlayerSkillLevel
     {
-        Beginner = 1,
-        Intermediate = 3,
+        Beginner = 3,
+        Intermediate = 4,
         Advanced = 5
     }
 
