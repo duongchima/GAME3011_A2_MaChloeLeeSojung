@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour
 
     public float timer;
     public TextMeshProUGUI timerText;
+    bool selectedSkillLevel;
     bool gameStarted;
     public float threshold;
-    public GameObject Lock, resetButton, victory, gameOver, startButton;
+    public GameObject Lock, resetButton, victory, gameOver, startButton, advanced, intermediate, beginner;
     [SerializeField]
     private Lock _lock;
     [SerializeField]
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStarted = false;
+        selectedSkillLevel = false;
     }
     private void Update()
     {
@@ -73,9 +75,9 @@ public class GameManager : MonoBehaviour
 
     public enum PlayerSkillLevel
     {
-        Beginner = 1,
-        Intermediate = 5,
-        Advanced = 10
+        Beginner = 0,
+        Intermediate = 3,
+        Advanced = 5
     }
 
     public void UpdateDifficulty(Difficulties newDifficulty)
@@ -102,11 +104,21 @@ public class GameManager : MonoBehaviour
     }
     public void DisplayLock()
     {
-        Lock.SetActive(true);
-        resetButton.SetActive(true);
-        startButton.SetActive(false);
-        gameStarted = true;
-        GenerateSweetSpot();
+        if (selectedSkillLevel)
+        {
+            Lock.SetActive(true);
+            resetButton.SetActive(true);
+            startButton.SetActive(false);
+            beginner.SetActive(false);
+            intermediate.SetActive(false);
+            advanced.SetActive(false);
+            gameStarted = true;
+            GenerateSweetSpot();
+        }
+        else
+        {
+            Debug.Log("Must pick a skill Level!");
+        }
     }
     public void GenerateSweetSpot()
     {
@@ -119,6 +131,8 @@ public class GameManager : MonoBehaviour
     {
         _lock.BobbyPin.transform.rotation = _lock.bobbyPinStartRot;
         _lock.Screwdriver.transform.rotation = _lock.screwdriverStartingRot;
+        _lock.BobbyPin.transform.position = _lock.bobbyPinStartPos;
+        _lock.Screwdriver.transform.position = _lock.screwdriverStartingPos;
         GenerateSweetSpot();
         resetButton.SetActive(true);
         Lock.SetActive(true);
@@ -151,5 +165,20 @@ public class GameManager : MonoBehaviour
             _lock.unlocked = false;
             diceRoll.RollDifficulty();
         }
+    }
+    public void AdvancedSelected()
+    {
+        playerSkill = PlayerSkillLevel.Advanced;
+        selectedSkillLevel = true;
+    }
+    public void IntermediateSelected()
+    {
+        playerSkill = PlayerSkillLevel.Intermediate;
+        selectedSkillLevel = true;
+    }
+    public void BeginnerSelected()
+    {
+        playerSkill = PlayerSkillLevel.Beginner;
+        selectedSkillLevel = true;
     }
 }
