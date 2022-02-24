@@ -452,9 +452,9 @@ MonoBehaviour:
   victory: {fileID: 2078115284}
   gameOver: {fileID: 1937180012}
   startButton: {fileID: 1549843360}
-  advanced: {fileID: 0}
-  intermediate: {fileID: 0}
-  beginner: {fileID: 0}
+  advanced: {fileID: 524807012}
+  intermediate: {fileID: 1711343533}
+  beginner: {fileID: 553107181}
   _lock: {fileID: 3509257278855351365}
   diceRoll: {fileID: 1749730561}
   playerSkill: 1

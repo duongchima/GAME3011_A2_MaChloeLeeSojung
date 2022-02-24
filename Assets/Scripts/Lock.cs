@@ -132,14 +132,14 @@ public class Lock : MonoBehaviour
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            if (Screwdriver.transform.position.y <= 660) {
+            if (Screwdriver.transform.localPosition.y <= 38) {
                 Screwdriver.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * screwdriverMoveSpeed;
                 
             }
         }
         if(Input.GetAxisRaw("Vertical") < 0)
         {
-            if (Screwdriver.transform.position.y >= 610)
+            if (Screwdriver.transform.localPosition.y >= -12)
             {
                 Screwdriver.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * screwdriverMoveSpeed;
                 
@@ -151,14 +151,14 @@ public class Lock : MonoBehaviour
         BobbyPin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(Input.mousePosition.x * bobbypinRotSpeed, 0, 180));
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            if (BobbyPin.transform.position.y >= 610)
+            if (BobbyPin.transform.localPosition.y >= -12)
             {
                 BobbyPin.transform.position += new Vector3(0, -1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
             }
         }
         if(Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if (BobbyPin.transform.position.y <= 660)
+            if (BobbyPin.transform.localPosition.y <= 38)
             {
                 BobbyPin.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * bobbyPinMoveSpeed;
             }
