@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
-    public bool hasPlayed = false;
+    public bool bobbyPinRotFound = false;
+    public bool bobbyPinPosFound = false;
+    public bool screwDriverRotFound = false;
+    public bool screwDriverPosFound = false;
     public bool unlocked = false;
     public Quaternion bobbyPinStartRot;
     public Quaternion screwdriverStartingRot;
@@ -48,8 +51,8 @@ public class Lock : MonoBehaviour
 
             if (Screwdriver.transform.rotation.eulerAngles.z > screwdriverSweetSpotRot - (increasedChance) &&
                 Screwdriver.transform.rotation.eulerAngles.z < screwdriverSweetSpotRot + (increasedChance) &&
-                Screwdriver.transform.position.y > screwdriverSweetSpotPos - (increasedChance) &&
-                Screwdriver.transform.position.y < screwdriverSweetSpotPos + (increasedChance))
+                Screwdriver.transform.localPosition.y > screwdriverSweetSpotPos - (increasedChance) &&
+                Screwdriver.transform.localPosition.y < screwdriverSweetSpotPos + (increasedChance))
             {
                 Locks["Screwdriver"] = true;
             }
@@ -60,27 +63,27 @@ public class Lock : MonoBehaviour
             if (Screwdriver.transform.rotation.eulerAngles.z > screwdriverSweetSpotRot - (increasedChance) &&
                 Screwdriver.transform.rotation.eulerAngles.z < screwdriverSweetSpotRot + (increasedChance))
             {
-                if (!hasPlayed)
+                if (!screwDriverRotFound)
                 {
                     SFX.PlaySound("unlock");
                     Debug.Log("Found screwdriver rotation sweet spot!");
-                    hasPlayed = true;
+                    screwDriverRotFound = true;
                 }
             }
-            else if (Screwdriver.transform.position.y > screwdriverSweetSpotPos - (increasedChance) &&
-                Screwdriver.transform.position.y < screwdriverSweetSpotPos + (increasedChance))
+            if (Screwdriver.transform.localPosition.y > screwdriverSweetSpotPos - (increasedChance) &&
+                Screwdriver.transform.localPosition.y < screwdriverSweetSpotPos + (increasedChance))
             {
-                if (!hasPlayed)
+                if (!screwDriverPosFound)
                 {
                     SFX.PlaySound("unlock");
-                    Debug.Log("Found screwdriver rotation sweet spot!");
-                    hasPlayed = true;
+                    Debug.Log("Found screwdriver position sweet spot!");
+                    screwDriverPosFound = true;
                 }
             }
             if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) && 
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance) &&
-                BobbyPin.transform.position.y > bobbyPinSweetSpotPos - (increasedChance) &&
-                BobbyPin.transform.position.y < bobbyPinSweetSpotPos + (increasedChance))
+                BobbyPin.transform.localPosition.y > bobbyPinSweetSpotPos - (increasedChance) &&
+                BobbyPin.transform.localPosition.y < bobbyPinSweetSpotPos + (increasedChance))
             {
                 Locks["BobbyPin"] = true;
             }
@@ -91,21 +94,21 @@ public class Lock : MonoBehaviour
              if (BobbyPin.transform.rotation.eulerAngles.z > bobbyPinSweetSpotRot - (increasedChance) &&
                 BobbyPin.transform.rotation.eulerAngles.z < bobbyPinSweetSpotRot + (increasedChance))
             {
-                if (!hasPlayed)
+                if (!bobbyPinRotFound)
                 {
                     SFX.PlaySound("unlock");
-                    Debug.Log("Found screwdriver rotation sweet spot!");
-                    hasPlayed = true;
+                    Debug.Log("Found bobby pin rotation sweet spot!");
+                    bobbyPinRotFound = true;
                 }
             }
-            else if (BobbyPin.transform.position.y > bobbyPinSweetSpotPos - (increasedChance) &&
-                BobbyPin.transform.position.y < bobbyPinSweetSpotPos + (increasedChance))
+            if (BobbyPin.transform.localPosition.y > bobbyPinSweetSpotPos - (increasedChance) &&
+                BobbyPin.transform.localPosition.y < bobbyPinSweetSpotPos + (increasedChance))
             {
-                if (!hasPlayed)
+                if (!bobbyPinPosFound)
                 {
                     SFX.PlaySound("unlock");
-                    Debug.Log("Found screwdriver rotation sweet spot!");
-                    hasPlayed = true;
+                    Debug.Log("Found bobby pin position sweet spot!");
+                    bobbyPinPosFound = true;
                 }
             }
             if (Locks["BobbyPin"] && Locks["Screwdriver"]) Locks["LockBase"] = true;

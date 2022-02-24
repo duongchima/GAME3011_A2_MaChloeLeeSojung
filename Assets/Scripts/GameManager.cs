@@ -124,7 +124,10 @@ public class GameManager : MonoBehaviour
         Lock.SetActive(true);
         gameOver.SetActive(false);
         victory.SetActive(false);
-        _lock.hasPlayed = false;
+        _lock.bobbyPinRotFound = false;
+        _lock.bobbyPinPosFound = false;
+        _lock.screwDriverRotFound = false;
+        _lock.screwDriverPosFound = false;
         if (!_lock.unlocked)
         {
             if (Difficulty == Difficulties.Easy)
